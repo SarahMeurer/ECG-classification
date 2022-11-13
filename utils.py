@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from keras.layers import Conv1D, MaxPooling1D, Dropout, BatchNormalization, Flatten, Dense, ReLU, Add
+from keras.layers import Input, Conv1D, MaxPooling1D, Dropout, BatchNormalization, Flatten, Dense, ReLU, Add
 from keras.models import Model
 
 from sklearn.utils.class_weight import compute_sample_weight
@@ -79,7 +79,9 @@ def residual_blocks_ribeiro(input, num_filter=128, rate_drop=0, initializer='non
     return layer, skip
 
 # Get the models os the network
-def get_model(input_layer, model_name):
+def get_model(input_shape, model_name):
+
+    input_layer = Input(shape=input_shape[1:],)
 
     if 'rajpurkar' in model_name:
         rate_drop = 1 - 0.8

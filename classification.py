@@ -1,24 +1,11 @@
 # Python packages
 import numpy as np
-import matplotlib.pyplot as plt
-from keras.layers import Input, Conv1D, MaxPooling1D, Dropout, BatchNormalization, Flatten, Dense, ReLU, Add
-from keras.models import Model
-from keras.optimizers import Adam, SGD
-from keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, EarlyStopping, CSVLogger
-
-from sklearn.metrics import accuracy_score, roc_auc_score
-from sklearn.metrics import multilabel_confusion_matrix
-from sklearn.metrics import classification_report
-from sklearn.metrics import plot_roc_curve
-from sklearn.utils.class_weight import compute_sample_weight
-import pandas as pd
-import seaborn as sns
 
 from datetime import datetime
-import pathlib
 
 import utils
 import train_model
+
 
 # Load data
 data = np.load('data_val.npz')
@@ -42,8 +29,7 @@ model_name = 'ribeiro'
 timestamp = datetime.now().isoformat()
 model_name = f'{model_name}-{timestamp}'
 
-input_layer = Input(shape=X_train.shape[1:])
-model = utils.get_model(input_layer, model_name)
+model = utils.get_model(X_train.shape, model_name)
 # model.summary()
 
 # Train the model
